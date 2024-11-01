@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Mes de Amor Contigo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #fff0f3;
+            color: #4a4a4a;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(255, 192, 203, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.3);
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ff4d6d;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffe6e6, #ffb6c1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+            font-size: 1.5rem;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            color: #ff4d6d;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+        }
+
+        .heart-animation {
+            font-size: 5rem;
+            animation: heartbeat 1.5s infinite;
+            margin: 2rem 0;
+            color: #ff4d6d;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #ff4d6d;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '♥';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #ff4d6d;
+        }
+
+        /* Categorías de Fotos */
+        .photo-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-title {
+            color: #ff4d6d;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ff4d6d;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .photo-item {
+            height: 250px;
+            background: #ffd9e0;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+        }
+
+        .photo-placeholder {
+            color: #ff4d6d;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Nuestra Foto Section */
+        .our-photo-section {
+            background: linear-gradient(135deg, #ffe6e6, #ffb6c1);
+            padding: 6rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 30px;
+        }
+
+        .our-photo-container {
+            max-width: 400px;
+            margin:  auto;
+            background: white;
+            padding: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(255, 77, 109, 0.3);
+            position: relative;
+        }
+
+        .our-photo-container::before,
+        .our-photo-container::after {
+            content: '❤️';
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite alternate;
+        }
+
+        .our-photo-container::before {
+            top: -20px;
+            left: -20px;
+        }
+
+        .our-photo-container::after {
+            bottom: -20px;
+            right: -20px;
+        }
+
+        .our-photo {
+            width: 100%;
+            height: 350px;
+            background: #ffd9e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-image {
+            width: 90%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 5px;
+            /* Ajusta la imagen para cubrir todo el contenedor */
+        }
+/* Media queries para diferentes tamaños de pantalla */
+@media (min-width: 250px) {
+    .photo-image {
+        width: 90%;
+        height: 80%;    }
+}
+
+@media (min-width: 200px) {
+    .our-photo {
+            width: 100%;
+            height: 250px;
+            background: #ffd9e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+    }
+}
+
+@media (min-width: 2500px) {
+    .our-photo {
+        max-width: 400px;
+        max-height: 300px;
+        /* Aumenta el tamaño en pantallas medianas */
+    }
+}
+        .photo-caption {
+            color: #ff4d6d;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Mensajes de Amor Section */
+        .love-messages {
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 20px;
+            margin-top: 4rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-card {
+            background: linear-gradient(135deg, #ffe6e6, #ffb6c1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .message-card::before {
+            content: '💌';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 2rem;
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ff4d6d;
+        }
+
+        /* Contador Section */
+        .counter-section {
+            background: linear-gradient(135deg, #ffb6c1, #ff4d6d);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 30px;
+            margin-top: 4rem;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        .counter-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .counter-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+
+        .counter-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .counter-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: #ff4d6d;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-heart {
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .category {
+                margin: 1rem;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #fff0f3;
+            color: #4a4a4a;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(255, 192, 203, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.3);
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Hamburger Icon */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ff4d6d;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Hide navbar links on mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background: rgba(255, 192, 203, 0.95);
+                position: absolute;
+                top: 60px;
+                right: 2rem;
+                padding: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffe6e6, #ffb6c1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+            font-size: 1.5rem;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            color: #ff4d6d;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+        }
+
+        .heart-animation {
+            font-size: 3rem;
+            animation: heartbeat 1.5s infinite;
+            margin: 2rem 0;
+            color: #ff4d6d;
+        }
+
+        /* Sections */
+        section {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #ff4d6d;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        /* Photo Categories */
+        .photo-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .category {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Sizing */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .heart-animation {
+                font-size: 2rem;
+            }
+
+            .category-title {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .counter-number {
+                font-size: 2rem;
+            }
+
+            .counter-label {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-heart"></i>
+                Nuestro Amor
+            </a>
+            <div class="nav-links">
+                <a href="#memorias">Memorias</a>
+                <a href="#mensajes">Mensajes</a>
+                <a href="#nuestra-foto">Nuestra Foto</a>
+                <a href="#contador">Momentos</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section con corazones flotantes -->
+    <section class="hero">
+        <div class="floating-hearts" id="floating-hearts"></div>
+        <div class="hero-content">
+            <h1>Feliz Primer Mes Mi Amor</h1>
+            <div class="heart-animation">❤️</div>
+            <p>30 días de amor, dulzura y momentos especiales juntos</p>
+        </div>
+    </section>
+
+    <!-- Sección de Memorias -->
+    <section id="memorias">
+        <h2 class="section-title">Nuestras Memorias en Imágenes</h2>
+
+        <div class="photo-categories">
+            <div class="category">
+                <div class="category-icon">🧸</div>
+                <h3 class="category-title">Ositos Tiernos</h3>
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Osito Amor 1</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Osito Amor 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">💝</div>
+                <h3 class="category-title">Momentos Especiales</h3>
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Momento 1</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Momento 2</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">✨</div>
+                <h3 class="category-title">Detalles Bonitos</h3>
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Detalle 1</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Detalle 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Mensajes de Amor -->
+    <section id="mensajes" class="love-messages">
+        <h2 class="section-title">Mensajes del Corazón</h2>
+
+        <div class="message-card">
+            <p class="message-text">
+                "Cada día a tu lado es una nueva aventura, un nuevo motivo para sonreír. Este mes ha sido el comienzo de
+                algo maravilloso."
+            </p>
+        </div>
+
+        <div class="message-card">
+            <p class="message-text">
+                "Contigo los días son más brillantes, las risas más dulces y los momentos más especiales."
+            </p>
+        </div>
+
+        <div class="message-card">
+            <p class="message-text">
+                "No necesitamos mil fotos para demostrar nuestro amor, porque lo que sentimos está grabado en nuestros
+                corazones."
+            </p>
+        </div>
+    </section>
+
+    <!-- Nuestra Foto Section -->
+    <section id="nuestra-foto" class="our-photo-section">
+        <h2 class="section-title">Nuestra Foto Especial</h2>
+
+        <div class="our-photo-container">
+            <div class="our-photo">
+                <img src="img/img3.jpg" alt="Nuestra única y especial foto juntos" class="photo-image">
+            </div>
+            <p class="photo-caption">El momento más especial capturado para siempre</p>
+        </div>
+    </section>
+
+    <!-- Contador Section -->
+    <section id="contador" class="counter-section">
+        <h2 class="section-title">Nuestros Momentos Juntos</h2>
+        <div class="counter-container">
+            <div class="counter-item">
+                <div class="counter-number" id="days">30</div>
+                <div class="counter-label">Días</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="hours">720</div>
+                <div class="counter-label">Horas</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="minutes">43200</div>
+                <div class="counter-label">Minutos</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="seconds">2592000</div>
+                <div class="counter-label">Segundos</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            Hecho con <span class="footer-heart">❤️</span> para ti
+        </p>
+    </footer>
+
+    <script>
+        // Crear corazones flotantes en el hero
+        function createFloatingHearts() {
+            const container = document.getElementById('floating-hearts');
+            const hearts = ['❤️', '💖', '💝', '💗', '💓'];
+
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 20 + 's';
+                heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+                container.appendChild(heart);
+            }
+        }
+
+        // Función para actualizar el contador
+        function updateCounter() {
+            const startDate = new Date(2024, 8, 1); // Ajusta esta fecha al inicio de su relación
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor(diff / (1000 * 60));
+            const seconds = Math.floor(diff / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Smooth scroll para los enlaces del navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Inicializar funciones
+        createFloatingHearts();
+        setInterval(updateCounter, 1000);
+        updateCounter();
+    </script>
+</body>
+
+</html>
